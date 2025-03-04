@@ -14,15 +14,21 @@ jobs:
       - run:
           name: Run tests
           command: ./vendor/bin/phpunit
-  echo-hello-world:
+  test-playwright:
     docker:
-      - image: cimg/base:stable
+      - image: mcr.microsoft.com/playwright:latest
     steps:
+      - checkout
       - run:
-          name: Echo Hello World
-          command: echo "Hello World"
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Run Playwright tests
+          command: npx playwright test
 workflows:
   build-and-test:
     jobs:
       - test-php
-      - echo-hello-world
+      - test-playwright:
+          requires:
+            - test-php
