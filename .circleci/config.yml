@@ -16,7 +16,7 @@ jobs:
           command: ./vendor/bin/phpunit
   test-playwright:
     docker:
-      - image: mcr.microsoft.com/playwright:latest
+      - image: mcr.microsoft.com/playwright:v1.37.0-focal
     steps:
       - checkout
       - run:
